@@ -1,0 +1,11 @@
+@import "https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css";
+
+main {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+}
+
+.dates {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
