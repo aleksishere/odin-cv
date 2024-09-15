@@ -10,6 +10,17 @@ const Education = () => {
   const addToArray = (e) => {
     e.preventDefault();
     if (school.schoolName === "" || school.schoolStart === "" || school.schoolEnd === "") return false;
+
+    if (isEditing) {
+      let newSchoolList = [...schoolList];
+      newSchoolList[editIndex] = school;
+      setSchoolList(newSchoolList);
+      setIsEditing(false);
+      setEditIndex(null);
+      setSchool({ schoolName: "", schoolStart: "", schoolEnd: "" });
+      return;
+    }
+
     setSchoolList([...schoolList, school]);
     setSchool({ schoolName: "", schoolStart: "", schoolEnd: "" })
   }
@@ -18,6 +29,12 @@ const Education = () => {
     setIsEditing(true);
     setEditIndex(index);
     setSchool(schoolList[index]);
+  }
+
+  const deleteSchool = (index) => {
+    let newSchoolList = [...schoolList];
+    newSchoolList.splice(index, 1);
+    setSchoolList(newSchoolList);
   }
 
   return (
@@ -35,7 +52,8 @@ const Education = () => {
         {schoolList.map((school, index) => (
           <div key={index}>
              <li>{school.schoolName} ({school.schoolStart} - {school.schoolEnd})</li>
-             <button onClick={() => editSchool(index)}>Edit</button>
+             <button type='button' onClick={() => editSchool(index)}>Edit</button>
+             <button type='button' onClick={() => deleteSchool(index)}>Delete</button>
           </div>
         ))}
       </ul>

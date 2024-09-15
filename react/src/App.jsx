@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import './App.css'
 import Education from './Education.jsx';
+import Work from './Work.jsx';
 
 function App() {
   const [jobTitle, setJobTitle] = useState('Web Developer')
@@ -45,6 +46,7 @@ function App() {
           <textarea value={notes} onChange={(e) => setNotes(e.target.value)} />
         </div>
         <Education />
+        <Work />
       </form>
     </div>
   )
