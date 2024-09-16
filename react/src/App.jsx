@@ -2,14 +2,13 @@ import { useState } from 'react'
 import './App.css'
 
 function App() {
-  const [jobTitle, setJobTitle] = useState('Web Developer')
+  const [jobTitle, setJobTitle] = useState('Full-stack Web Developer')
   const [firstName, setFirstName] = useState('Aleks')
   const [lastName, setLastName] = useState('Michalak')
-  const fullName = `${firstName} ${lastName}`
   const [email, setEmail] = useState('email@aleksmichalak.pl')
   const [phone, setPhone] = useState('123456789')
   const [address, setAddress] = useState('Poznan, Poland')
-  const [notes, setNotes] = useState('Hi')
+  const [notes, setNotes] = useState('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce viverra posuere mollis. Curabitur nec tristique metus, at eleifend felis. Aliquam accumsan magna in convallis tincidunt. Aenean mattis mi metus, in mattis enim cursus id. In pretium viverra ultricies. Aenean in condimentum orci. Pellentesque faucibus non odio eget efficitur. ')
 
   // School State
   const [school, setSchool] = useState({ schoolName: "", schoolStart: "", schoolEnd: "" });
@@ -87,41 +86,35 @@ function App() {
     setWorkList(newWorkList);
   }
 
-
-
-
-
-
-
-
-
   return(
-    <div>
+    <div data-theme="dark">
       <main>
         {/* ////////////////////////////////////////// */}
         {/* Main info component */}
         {/* ////////////////////////////////////////// */}
-        <div className="box">
-          <div>
-            <input type="text" className="input" placeholder='Job' value={jobTitle} onChange={(e) => setJobTitle(e.target.value)} />
-          </div>
-          <div>
-            <input type="text" className="input" placeholder='First Name' value={firstName} onChange={(e) => setFirstName(e.target.value)} />
-          </div>
-          <div>
-            <input type="text" className="input" placeholder='Last Name' value={lastName} onChange={(e) => setLastName(e.target.value)} />
-          </div>
-          <div>
-            <input type="email" className="input" placeholder='Email' value={email} onChange={(e) => setEmail(e.target.value)} />
-          </div>
-          <div>
-            <input type="tel" className="input" placeholder='Phone' value={phone} onChange={(e) => setPhone(e.target.value)} />
-          </div>
-          <div>
-            <input type="text" className="input" placeholder='Address' value={address} onChange={(e) => setAddress(e.target.value)} />
-          </div>
-          <div className="pb-3">
-            <textarea value={notes} className="input" placeholder='Notes' onChange={(e) => setNotes(e.target.value)} />
+        <div className="box asideCard">
+          <div className='rest'>
+            <div>
+              <input type="text" className="input" placeholder='Job' value={jobTitle} onChange={(e) => setJobTitle(e.target.value)} />
+            </div>
+            <div>
+              <input type="text" className="input" placeholder='First Name' value={firstName} onChange={(e) => setFirstName(e.target.value)} />
+            </div>
+            <div>
+              <input type="text" className="input" placeholder='Last Name' value={lastName} onChange={(e) => setLastName(e.target.value)} />
+            </div>
+            <div>
+              <input type="email" className="input" placeholder='Email' value={email} onChange={(e) => setEmail(e.target.value)} />
+            </div>
+            <div>
+              <input type="tel" className="input" placeholder='Phone' value={phone} onChange={(e) => setPhone(e.target.value)} />
+            </div>
+            <div>
+              <input type="text" className="input" placeholder='Address' value={address} onChange={(e) => setAddress(e.target.value)} />
+            </div>
+            <div className="pb-3">
+              <textarea value={notes} className="input" placeholder='Notes' onChange={(e) => setNotes(e.target.value)} />
+            </div>
           </div>
           {/* ////////////////////////////////////////// */}
           {/* Education component */}
@@ -143,10 +136,10 @@ function App() {
             </form>
             <ul>
               {schoolList.map((school, index) => (
-                <div key={index}>
+                <div className='listWrapper' key={index}>
                   <li>{school.schoolName} ({school.schoolStart} - {school.schoolEnd})</li>
-                  <button type='button' onClick={() => editSchool(index)}>Edit</button>
-                  <button type='button' onClick={() => deleteSchool(index)}>Delete</button>
+                  <button className='button' type='button' onClick={() => editSchool(index)}>Edit</button>
+                  <button className='button' type='button' onClick={() => deleteSchool(index)}>Delete</button>
                 </div>
               ))}
             </ul>
@@ -172,24 +165,42 @@ function App() {
             </form>
             <ul>
               {workList.map((work, index) => (
-                <div key={index}>
+                <div className='listWrapper' key={index}>
                   <li>{work.workName} {work.workPosition} ({work.workStart} - {work.workEnd})</li>
-                  <button type='button' class="button" onClick={() => editWork(index)}>Edit</button>
-                  <button type='button' class="button" onClick={() => deleteWork(index)}>Delete</button>
+                  <button type='button' className="button" onClick={() => editWork(index)}>Edit</button>
+                  <button type='button' className="button" onClick={() => deleteWork(index)}>Delete</button>
                 </div>
               ))}
             </ul>
           </div>
         </div>
-
-        <aside>
-        <p>
-          <strong>Job Title:</strong> {jobTitle}</p>
-          <p><strong>Name:</strong> {firstName} {lastName}</p>
-          <p><strong>Email:</strong> {email}</p>
-          <p><strong>Phone:</strong> {phone}</p>
-          <p><strong>Address:</strong> {address}</p>
-          <p><strong>Notes:</strong> {notes}</p>
+        <aside className='cv-container'>
+          <div className='cv-head'>
+            <h1>{firstName} {lastName}</h1>
+            <h2>{jobTitle}</h2>
+          </div>
+          <div className='cv-content'>
+            <p><strong>Email:</strong> {email}</p>
+            <p><strong>Phone:</strong> {phone}</p>
+            <p><strong>Address:</strong> {address}</p>
+            <p><strong>Notes:</strong></p><p>{notes}</p>
+            <ul className='cv-lists'>
+              {schoolList.length > 0 && <h3><strong>Education</strong></h3>}
+              {schoolList.map((school, index) => (
+                <div key={index}>
+                  <li><strong>{school.schoolName}</strong> ({school.schoolStart} - {school.schoolEnd})</li>
+                </div>
+              ))}
+            </ul>
+            <ul className='cv-lists'>
+             {workList.length > 0 && <h3><strong>Work Experience</strong></h3>}
+              {workList.map((work, index) => (
+                <div key={index}>
+                  <li><strong>{work.workName} {work.workPosition}</strong> ({work.workStart} - {work.workEnd})</li>
+                </div>
+              ))}
+            </ul>
+          </div>
         </aside>
       </main>
     </div>
